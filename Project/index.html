@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark"> <!--data-bs-theme="dark"-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Style Sheets -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-md border-bottom" > <!--navbar-light bg-light--><!--border-bottom-->
+            <div class="container-fluid">
+                <!-- Brand Logo (text changes to an image on smaller screens) -->
+                <a class="navbar-brand d-flex align-items-center" href="#" id="navbarActiveSection">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+                        <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z"/>
+                        <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    </svg>
+                    <div class="d-inline">&nbsp;TaskManager</div>
+                </a>
+              
+                <!-- Toggler for small screens -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <!-- Navbar Content -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Search Input -->
+                    <form class="d-flex ms-auto mx-2 my-1" role="search">
+                    <input class="form-control me-2" type="search" id="navbarSearch" placeholder="Search" aria-label="Search">
+                    </form>
+                    
+                    <!-- Sort & Filter Dropdown -->
+                    <div class="dropdown mx-2 my-1">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortFilterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                            </svg>
+                            <!-- <i class="bi bi-filter"></i> -->
+                            <div class="d-none d-lg-inline">Sort</div>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortFilterDropdown">
+                            <li><h6 class="dropdown-header">Sort</h6></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortHandler('asc')">Earliest first</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortHandler('desc')">Last first</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><h6 class="dropdown-header">Filter</h6></li>
+                            <li><a class="dropdown-item" href="#" onclick="filterHandler('Work')" >Label: Work</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="filterHandler('Personal')">Label: Personal</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="filterHandler('Urgent')">Label: Urgent</a></li>
+                            <li><a class="dropdown-item" href="#">Status</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Add Task Icon -->
+                    <a class="btn btn-outline-success my-1 " href="#"  id="navbarAddTask">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sticky-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177z"/>
+                        </svg>
+                        <!-- <i class="bi bi-sticky-fill"></i> -->
+                        <div class="d-none d-lg-inline">Add Task</div>
+                    </a>
+                    
+                    <!-- Archive Section -->
+                    <a class="btn btn-outline-secondary mx-1 my-1" href="#" id="navbarArchivedSection">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                            <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
+                        </svg>
+                        <div class="d-none d-xl-inline">Archive</div>
+                    </a>
+            
+                    <!-- Deleted Section -->
+                    <a class="btn btn-outline-danger mx-1 my-1" href="#" id="navbarDeletedSection">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                        </svg>
+                        <div class="d-none d-xl-inline">Deleted</div>
+                    </a>
+            
+                    <!-- Reload Button -->
+                    <a class="btn btn-outline-primary mx-1 my-1" href="#" id="navbarReload">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise mb-1" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                        </svg>
+                        <div class="d-none d-xl-inline">Reload</div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+        <!-- Container -->
+        <div class="container mt-4" >
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="taskContainer">
+
+            </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+        <!-- Modal -->
+        <div class="modal fade" id="TaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addTaskModalLabel" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="TaskModalLabel">Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="clearTask1"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="TaskForm">
+                            <!-- Task Title -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="taskTitle" placeholder="Title" required>
+                                <label for="taskTitle">Title</label>
+                            </div>
+                            <!-- Task Description -->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="taskDescription" placeholder="Description" style="height: 100px"></textarea>
+                                <label for="taskDescription">Description</label>
+                            </div>
+                            <!-- Date & Time -->
+                            <div class="form-floating mb-3">
+                                <input type="datetime-local" class="form-control" id="taskDateTime" placeholder="Date and Time" required>
+                                <label for="taskDateTime">Date & Time</label>
+                            </div>
+                            <!-- Task Label -->
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="taskLabel" required>
+                                    <option value="" disabled selected>Select label</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                                <label for="taskLabel">Label</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" id="clearTask2">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="saveTask">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="UpdateTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addUpdateTaskModalLabel" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="UpdateTaskModalLabel">Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="TaskForm">
+                            <!-- Task Title -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="taskTitleUpdate" placeholder="Title" required>
+                                <label for="taskTitle">Title</label>
+                            </div>
+                            <!-- Task Description -->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="taskDescriptionUpdate" placeholder="Description" style="height: 100px"></textarea>
+                                <label for="taskDescription">Description</label>
+                            </div>
+                            <!-- Date & Time -->
+                            <div class="form-floating mb-3">
+                                <input type="datetime-local" class="form-control" id="taskDateTimeUpdate" placeholder="Date and Time" required>
+                                <label for="taskDateTime">Date & Time</label>
+                            </div>
+                            <!-- Task Label -->
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="taskLabelUpdate" required>
+                                    <option value="" disabled selected>Select label</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                                <label for="taskLabel">Label</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" id="clearTask4">Cancel</button> -->
+                         <input type="text" class="d-none" id="ID">
+                        <button type="button" class="btn btn-primary" id="updateTask">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+
+        <!-- JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/model.js"></script>
+        <script src="js/view.js"></script>
+        <script src="js/controller.js"></script>
+    </body>
+</html>
